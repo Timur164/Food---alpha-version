@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionFood"
+        android:enabled="true"
+        android:icon="@drawable/ic_meal"
+        android:title="@string/menu"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionAccount"
+        android:icon="@drawable/ic_account"
+        android:title="@string/Profile"
+        android:enabled="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionContact"
+        android:icon="@drawable/ic_contact"
+        android:title="@string/Contact"
+        android:enabled="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionBasket"
+        android:icon="@drawable/ic_basket"
+        android:title="@string/basket"
+        android:enabled="false"
+        app:showAsAction="ifRoom" />
+</menu>

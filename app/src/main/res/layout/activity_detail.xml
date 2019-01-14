@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.lang.Integer" />
+
+        <variable
+            name="meal"
+            type="com.libra.food.data.entities.Meal" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTopMeal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingTop="16dp">
+
+            <ImageView
+                setBackground="@{meal}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/glCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/flClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:backgroundTint="@color/white"
+                android:onClick="onClick"
+                android:src="@drawable/ic_close"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                app:fabSize="mini"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/white" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="120dp"
+            app:layout_anchorGravity="center" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cl_corners"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:behavior_hideable="false"
+            app:elevation="6dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+            <TextView
+                android:id="@+id/tvNameMeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="35dp"
+                android:text="@{meal.title}"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/full_names" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/rating_shape"
+                android:elevation="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameMeal"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivStar"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/ic_star_yellow"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:text="4.8"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/tvNameMeal"
+                app:layout_constraintTop_toBottomOf="@id/tvNameMeal"
+                tools:text="140*55" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{meal.text}"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/tvWeight"
+                app:layout_constraintTop_toBottomOf="@id/tvWeight"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/tvNameEatSummary"
+                setVisibility="@{meal.type!=1}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Пищевая ценность продукта на 100 г."
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tvDescription"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+            <TextView
+                android:id="@+id/tvNutritionalValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{meal.description}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/tvNameEatSummary"
+                app:layout_constraintTop_toBottomOf="@id/tvNameEatSummary"
+                tools:text="Пищевая ценность продукта на 100 г." />
+
+
+            <RadioGroup
+                android:id="@+id/rgSize"
+                setVisibility="@{meal.type==2 || meal.type==1}"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/gray_radio_button"
+                android:checkedButton="@+id/middle"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/thickness"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNutritionalValue"
+                app:layout_constraintVertical_chainStyle="spread">
+
+                <RadioButton
+                    android:id="@+id/large"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Большая"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/middle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Средняя"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/small"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Маленькая"
+                    android:textColor="@color/white" />
+            </RadioGroup>
+
+
+            <RadioGroup
+                android:id="@+id/thickness"
+                setVisibility="@{meal.type==2 || meal.type==1}"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/gray_radio_button"
+                android:checkedButton="@+id/thin"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/llSummator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgSize">
+
+                <RadioButton
+                    android:id="@+id/thin"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Традиционное тесто"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/fat"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Тонкое тесто"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/llSummator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/blue_radio_button"
+                app:layout_constraintBottom_toBottomOf="@id/glBottomCenter"
+                app:layout_constraintEnd_toStartOf="@id/tvPrice"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thickness">
+
+                <ImageView
+                    android:id="@+id/ivMinus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center"
+                    android:background="@color/darkGray"
+                    android:gravity="center_vertical|center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ivPlus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(meal.price)}"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/llSummator"
+                app:layout_constraintEnd_toStartOf="@id/btnBasket"
+                app:layout_constraintStart_toEndOf="@id/llSummator"
+                app:layout_constraintTop_toTopOf="@id/llSummator"
+                tools:text="480 " />
+
+            <Button
+                android:id="@+id/btnBasket"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/blue_radio_button"
+                android:onClick="onClick"
+                android:text="@string/In_basket"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/llSummator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPrice"
+                app:layout_constraintTop_toTopOf="@id/llSummator" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glBottomCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.65" />
+
+
+            <TextView
+                android:id="@+id/tvSouseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/souse_pizza"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/glBottomCenter" />
+
+            <TextView
+                android:id="@+id/tvCheeseSouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cheese"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/tvMustard"
+                app:layout_constraintStart_toStartOf="@id/tvSouseTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvSouseTitle" />
+
+            <LinearLayout
+                android:id="@+id/llSummatorCheese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/blue_radio_button"
+                app:layout_constraintBottom_toBottomOf="@id/tvCheeseSouse"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMinusCheese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/tvCountCheese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center"
+                    android:background="@color/darkGray"
+                    android:gravity="center_vertical|center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="0"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ivPlusCheese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvMustard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mustard"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/tvHotSouse"
+                app:layout_constraintStart_toStartOf="@id/tvCheeseSouse"
+                app:layout_constraintTop_toBottomOf="@id/tvCheeseSouse" />
+
+            <LinearLayout
+                android:id="@+id/llSummatorMustard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/blue_radio_button"
+                app:layout_constraintBottom_toBottomOf="@id/tvMustard"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMinusMustard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/tvCountMustard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center"
+                    android:background="@color/darkGray"
+                    android:gravity="center_vertical|center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="0"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ivPlusMustard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvHotSouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hot"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/btnBasketSouse"
+                app:layout_constraintStart_toStartOf="@id/tvMustard"
+                app:layout_constraintTop_toBottomOf="@id/tvMustard" />
+
+            <LinearLayout
+                android:id="@+id/llSummatorHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/blue_radio_button"
+                app:layout_constraintBottom_toBottomOf="@id/tvHotSouse"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMinusHot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/tvCountHot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center"
+                    android:background="@color/darkGray"
+                    android:gravity="center_vertical|center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="0"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ivPlusHot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnBasketSouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/blue_radio_button"
+                android:onClick="onClick"
+                android:text="@string/In_basket"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/flFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:elevation="18dp"
+            android:onClick="onClick"
+            android:src="@drawable/ic_star"
+            android:visibility="visible"
+            app:backgroundTint="@color/white"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/bottom_sheet"
+            app:layout_anchorGravity="top|end"
+            app:maxImageSize="25dp"
+            app:rippleColor="@color/gray" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

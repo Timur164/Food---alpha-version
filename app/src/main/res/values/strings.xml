@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Food Delivery</string>
+    <string name="logoSplash">Здесь могло быть ваше Лого</string>
+
+
+    <string name="hi">Привет!</string>
+    <string name="location">Россия, Казань</string>
+
+    <!--Верхнее меню-->
+    <string name="all_dishes">Все блюда</string>
+    <string name="combo">Комбо</string>
+    <string name="pizza">Пицца</string>
+
+    <!--Нижнее меню-->
+    <string name="menu">Меню</string>
+    <string name="Profile">Профиль</string>
+    <string name="Contact">Контакт</string>
+    <string name="basket">Корзина</string>
+    <string name="rolls">Роллы</string>
+    <string name="ivmeal">ivMeal</string>
+    <string name="empty_list">Хьстон, кажется мы потеряли связь с сервером</string>
+    <string name="In_basket">В корзину</string>
+    <string name="souse_pizza">Соус к пицце</string>
+    <string name="cheese">Сырный</string>
+    <string name="mustard">Горчичный</string>
+    <string name="hot">Острый</string>
+</resources>
