@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
 import com.libra.food.R
 import com.libra.food.databinding.FragmentMenuMealsBinding
-import com.libra.food.ui.fragment.meals.MealsFragment
-import com.libra.food.utils.inTransaction
 import kotlinx.android.synthetic.main.fragment_menu_meals.*
 
 class MenuMealsFragment : Fragment() {
@@ -24,7 +21,7 @@ class MenuMealsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewPager.adapter = SliderPageAdapter(fragmentManager, activity!!.applicationContext)
+        viewPager.adapter = SliderPageAdapter(childFragmentManager, activity!!.applicationContext)
         tabLayout.setupWithViewPager(viewPager)
     }
 }
